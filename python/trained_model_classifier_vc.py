@@ -47,9 +47,8 @@ class trained_model_classifier_vc(gr.sync_block):
 
     def work(self, input_items, output_items):
         in0 = input_items[0]
-        for index in range(np.shape(in0)[0]):
-            print np.shape(in0[index, :])
-            result = self.classifier.predict(np.ndarray.tolist(in0[index, :]))
+        for x in range(0, len(input_items), self.vlen):
+            result = self.classifier.predict(in0[x:x + self.vlen])
             print result
             # self.message_port_pub(
             #     pmt.intern('classification_info'),
