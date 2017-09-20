@@ -8,14 +8,14 @@
   <param>
     <name>Trained Model Filename</name>
     <key>trained_model_filename</key>
+      <value>filename.pkl</value>
     <type>string</type>
-    <value>filename.pkl</value>
   </param>
   <param>
     <name>Vector Length</name>
     <key>vlen</key>
+      <value>1</value>
     <type>int</type>
-    <value>1</value>
   </param>
   <sink>
     <name>in</name>
