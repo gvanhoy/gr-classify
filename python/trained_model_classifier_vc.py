@@ -42,7 +42,7 @@ class trained_model_classifier_vc(gr.sync_block):
             3: '16QAM'
         }
         self.message_port_register_out(pmt.intern('classification_info'))
-        self.classifier = joblib.load(trained_model_filename + '.pkl')
+        self.classifier = joblib.load(trained_model_filename)
 
     def work(self, input_items, output_items):
         in0 = input_items[0]
