@@ -50,9 +50,10 @@ class trained_model_classifier_vc(gr.sync_block):
         for index in range(np.shape(in0)[0]):
             print in0[index, :]
             result = self.classifier.predict(in0[index, :])
-            # self.message_port_pub(
-            #     pmt.intern('classification_info'),
-            #     pmt.cons(pmt.intern('modulation'), pmt.to_pmt(self.result_map[result])))
+            print result
+            self.message_port_pub(
+                pmt.intern('classification_info'),
+                pmt.cons(pmt.intern('modulation'), pmt.to_pmt(self.result_map[result])))
 
         return len(input_items[0])
 
