@@ -12,7 +12,9 @@
   </param>
   <sink>
     <name>in</name>
-    <type>complex_vector</type>
+    <type>complex</type>
+    <vlen>($vlen)</vlen>
+
   </sink>
   <source>
     <name>out</name>
