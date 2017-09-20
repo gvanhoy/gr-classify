@@ -46,11 +46,10 @@ class trained_model_classifier_vc(gr.sync_block):
 
     def work(self, input_items, output_items):
         in0 = input_items[0]
-        for sample in in0:
-            result = self.classifier.predict(sample)
-            self.message_port_pub(
-                pmt.intern('classification_info'),
-                pmt.cons(pmt.intern('modulation'), pmt.to_pmt(self.result_map[result])))
+        result = self.classifier.predict(sample)
+        self.message_port_pub(
+            pmt.intern('classification_info'),
+            pmt.cons(pmt.intern('modulation'), pmt.to_pmt(self.result_map[result])))
 
         return len(input_items[0])
 
