@@ -4,7 +4,7 @@ from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score
 from sklearn.externals import joblib
-from cumulants import Cumulants
+from python.cumulants import Cumulants
 import matplotlib.pyplot as plt
 import logging
 import numpy as np
