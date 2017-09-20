@@ -19,7 +19,7 @@
 # Boston, MA 02110-1301, USA.
 # 
 
-import numpy
+import numpy as np
 from gnuradio import gr
 import pmt
 from sklearn.externals import joblib
@@ -33,7 +33,7 @@ class trained_model_classifier_vc(gr.sync_block):
         gr.sync_block.__init__(
             self,
             name="trained_model_classifier_vc",
-            in_sig=[(numpy.complex64, vlen)],
+            in_sig=[(np.complex64, vlen)],
             out_sig=None)
         self.result_map = {
             0: 'BPSK',
@@ -46,8 +46,8 @@ class trained_model_classifier_vc(gr.sync_block):
 
     def work(self, input_items, output_items):
         in0 = input_items[0]
-        print numpy.shape(in0)
-        print type(in0), in0
+        for index, sample in np.nditer(in0):
+            print sample
         # for index, sample in enumerate(in0):
         #     print numpy.shape(sample)
             # result = self.classifier.predict(sample)
