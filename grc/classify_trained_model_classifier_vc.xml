@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<block>
+  <name>trained_model_classifier_vc</name>
+  <key>classify_trained_model_classifier_vc</key>
+  <category>[classify]</category>
+  <import>import classify</import>
+  <make>classify.trained_model_classifier_vc($vlen, $trained_model_filename)</make>
+  <param>
+    <name>Trained Model Filename</name>
+    <key>trained_model_filename</key>
+    <type>string</type>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>complex_vector</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>message</type>
+    <optional>1</optional>
+  </source>
+</block>
