@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <block>
-  <name>trained_model_classifier_vc</name>
+  <name>Trained Model Classifier</name>
   <key>classify_trained_model_classifier_vc</key>
   <category>[classify]</category>
   <import>import classify</import>
@@ -14,6 +14,7 @@
     <name>Vector Length</name>
     <key>vlen</key>
     <type>int</type>
+    <default>1</default>
   </param>
   <sink>
     <name>in</name>
