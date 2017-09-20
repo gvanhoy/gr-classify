@@ -49,7 +49,8 @@ class trained_model_classifier_vc(gr.sync_block):
         in0 = input_items[0]
         for index in range(np.shape(in0)[0]):
             print np.shape(in0[index, :])
-            result = self.classifier.predict(in0[index, :])
+            result = self.classifier.predict(np.asarray([index, :]))
+            print result
             # self.message_port_pub(
             #     pmt.intern('classification_info'),
             #     pmt.cons(pmt.intern('modulation'), pmt.to_pmt(self.result_map[result])))
