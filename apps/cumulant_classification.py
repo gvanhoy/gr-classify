@@ -1,15 +1,13 @@
 from constellation_modulator import constellation_modulator
-from sklearn.preprocessing import Normalizer
 from sklearn.svm import SVC
-from sklearn.decomposition import PCA
 from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score
+from sklearn.externals import joblib
 from cumulants import Cumulants
 import matplotlib.pyplot as plt
 import logging
 import numpy as np
-
 
 NUM_SAMPLES_PER_SNR = 50
 SNR_RANGE = range(-5, 15, 1)
@@ -34,6 +32,7 @@ class Classifier:
         self.generate_features()
         self.cross_validation()
         self.pcc_v_snr()
+        self.save_model()
 
     def generate_features(self):
         for snr_index, snr in enumerate(SNR_RANGE):
@@ -81,6 +80,9 @@ class Classifier:
         plt.savefig(file_name + '.eps', format='eps', dpi=1000)
         plt.savefig(file_name + '.png', format='png', dpi=300)
         plt.clf()
+
+    def save_model(self):
+        joblib.dump(self.clf, 'cumulant_classifier.pkl')
 
 
 if __name__ == '__main__':

@@ -35,17 +35,22 @@ class trained_model_classifier_vc(gr.sync_block):
             name="trained_model_classifier_vc",
             in_sig=[(numpy.complex64, vlen)],
             out_sig=None)
+        self.result_map = {
+            0: 'BPSK',
+            1: 'QPSK',
+            2: '8PSK',
+            3: '16QAM'
+        }
         self.message_port_register_out(pmt.intern('classification_info'))
-        self.classifier = joblib.load(trained_classier_file + '.pkl')
+        self.classifier = joblib.load(trained_model_filename + '.pkl')
 
     def work(self, input_items, output_items):
         in0 = input_items[0]
-
         for sample in in0:
-            self.classifier.predict(sample)
+            result = self.classifier.predict(sample)
             self.message_port_pub(
                 pmt.intern('classification_info'),
-                pmt.cons(pmt.intern('modulation'), pmt.to_pmt('BPSK')))
+                pmt.cons(pmt.intern('modulation'), pmt.to_pmt(self.result_map[result])))
 
         return len(input_items[0])
 
