@@ -1,1 +1,5 @@
 .idea/
+*.png
+*.eps
+examples/*.py
+*.pyc
