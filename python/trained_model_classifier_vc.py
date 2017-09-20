@@ -47,8 +47,9 @@ class trained_model_classifier_vc(gr.sync_block):
     def work(self, input_items, output_items):
         in0 = input_items[0]
         print numpy.shape(in0)
-        for index, sample in enumerate(in0):
-            print numpy.shape(sample)
+        print type(in0), in0
+        # for index, sample in enumerate(in0):
+        #     print numpy.shape(sample)
             # result = self.classifier.predict(sample)
             # self.message_port_pub(
             #     pmt.intern('classification_info'),
