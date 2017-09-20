@@ -14,7 +14,7 @@
     <name>Vector Length</name>
     <key>vlen</key>
     <type>int</type>
-    <default>1</default>
+    <value>1</value>
   </param>
   <sink>
     <name>in</name>
