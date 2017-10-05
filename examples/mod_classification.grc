@@ -886,7 +886,7 @@
     </param>
     <param>
       <key>trained_model_filename</key>
-      <value>/home/gvanhoy/pybombs/src/gr-classify/apps/cumulant_classifier.pkl</value>
+      <value>/home/gvanhoy/gr-classify/apps/cumulant_classifier.pkl</value>
     </param>
     <param>
       <key>vlen</key>
