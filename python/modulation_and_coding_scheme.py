@@ -57,7 +57,7 @@ class ModulationAndCodingScheme(gr.top_block):
         self.fec_extended_encoder_0 = fec.extended_encoder(encoder_obj_list=enc_cc, threading='capillary', puncpat=self.puncpat)
         self.digital_chunks_to_symbols_xx_0 = digital.chunks_to_symbols_bc((self.const.points()), 1)
         self.blocks_probe_signal_vx_0 = blocks.probe_signal_vc(self.num_samples)
-        self.blocks_head_0 = blocks.head(gr.sizeof_gr_complex*1, self.num_samples)
+        self.blocks_stream_to_vector_0 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, self.num_samples)
         self.analog_random_source_x_0 = blocks.vector_source_b(map(int, np.random.randint(0, 256, 10000)), True)
         self.channels_channel_model_0 = channels.channel_model(
             noise_voltage=np.sqrt(10.0**(-self.snr_db/10.0)/2),
@@ -74,7 +74,9 @@ class ModulationAndCodingScheme(gr.top_block):
         ##################################################
         self.connect((self.analog_random_source_x_0, 0), (self.fec_extended_encoder_0, 0))
         self.connect((self.fec_extended_encoder_0, 0), (self.digital_chunks_to_symbols_xx_0, 0))
-        self.connect((self.digital_chunks_to_symbols_xx_0, 0), (self.blocks_probe_signal_vx_0, 0))
+        self.connect((self.digital_chunks_to_symbols_xx_0, 0), (self.channels_channel_model_0, 0))
+        self.connect((self.channels_channel_model_0, 0), (self.blocks_stream_to_vector_0, 0))
+        self.connect((self.blocks_stream_to_vector_0, 0), (self.blocks_probe_signal_vx_0, 0))
 
     def get_num_samples(self):
         return self.num_samples
