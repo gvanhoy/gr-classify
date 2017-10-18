@@ -33,4 +33,4 @@ except ImportError:
 # import any pure python here
 from trained_model_classifier_vc import trained_model_classifier_vc
 from cumulant_transformer import CumulantTransformer
-from modulation_and_coding_scheme import modulation_and_coding_scheme
+from modulation_and_coding_scheme import ModulationAndCodingScheme
