@@ -20,10 +20,10 @@ class MCSClassifier:
         self.logger = logging.getLogger()
         self.logger.setLevel(logging.INFO)
 
-        self.classes = [ModulationAndCodingScheme('bpsk', '1/2', NUM_SAMPLES_PER_SIGNAL),
-                        ModulationAndCodingScheme('bpsk', '2/3', NUM_SAMPLES_PER_SIGNAL),
-                        ModulationAndCodingScheme('bpsk', '3/4', NUM_SAMPLES_PER_SIGNAL),
-                        ModulationAndCodingScheme('bpsk', '5/6', NUM_SAMPLES_PER_SIGNAL)]
+        self.classes = [ModulationAndCodingScheme('qpsk', '1/2', NUM_SAMPLES_PER_SIGNAL),
+                        ModulationAndCodingScheme('qpsk', '2/3', NUM_SAMPLES_PER_SIGNAL),
+                        ModulationAndCodingScheme('qpsk', '3/4', NUM_SAMPLES_PER_SIGNAL),
+                        ModulationAndCodingScheme('qpsk', '5/6', NUM_SAMPLES_PER_SIGNAL)]
 
         self.accuracy = np.zeros((len(SNR_RANGE),), dtype=np.float32)
         self.features = np.ndarray((len(SNR_RANGE)*len(self.classes)*NUM_SAMPLES_PER_SNR, NUM_SAMPLES_PER_SIGNAL), dtype=np.complex64)

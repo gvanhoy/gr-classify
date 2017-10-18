@@ -42,7 +42,7 @@ class ModulationAndCodingScheme(gr.top_block):
         self.code_rate = code_rate
         self.num_samples = num_samples
         self.code_type = code_type
-        self.enc_cc = enc_cc = fec.cc_encoder_make(2048, 7, 2, ([79, 109]), 0, fec.CC_STREAMING, False)
+        self.enc_cc = enc_cc = fec.cc_encoder_make(25, 7, 2, ([79, 109]), 0, fec.CC_STREAMING, False)
         self.const = digital.constellation_bpsk().base()
         self.puncpat = '11'
         self.snr_db = 10
@@ -110,6 +110,14 @@ class ModulationAndCodingScheme(gr.top_block):
         }.get(const_string, digital.constellation_bpsk().base())
 
     def get_puncpat_from_string(self, code_rate_string):
+        '''
+            The puncpat comes from the "puncturing matrix" that is
+            shown for convolutional codes on wikipedia:
+            https://en.wikipedia.org/wiki/Convolutional_code
+            Where a matrix: 1 0 1
+                            1 1 0
+            becomes puncpat: '110110'
+        '''
         self.puncpat = {
             '1/2': '11',
             '2/3': '1101',
