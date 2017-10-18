@@ -40,13 +40,13 @@ class MCSClassifier:
         for snr_index, snr in enumerate(SNR_RANGE):
             for tb_index, top_block in enumerate(self.classes):
                 top_block.set_snr_db(snr)
-                top_block.start()
+                top_block.run()
                 logging.info("Generating features for tb:{0} snr: {1}".format(tb_index, snr))
                 for x in range(NUM_SAMPLES_PER_SNR):
-                    old_sample = top_block.blocks_probe_signal_vx_0.level()
+                    old_sample = top_block.blocks_vector_sink_x_0.data()
                     new_sample = old_sample
                     while new_sample[0] == old_sample[0]:
-                        new_sample = top_block.blocks_probe_signal_vx_0.level()
+                        new_sample = top_block.blocks_vector_sink_x_0.data()
                     self.features[x + tb_index*NUM_SAMPLES_PER_SNR + snr_index*len(self.classes)*NUM_SAMPLES_PER_SNR, :] = new_sample
                     self.labels[x + tb_index*NUM_SAMPLES_PER_SNR + snr_index*len(self.classes)*NUM_SAMPLES_PER_SNR] = tb_index
                 top_block.stop()
