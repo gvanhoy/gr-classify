@@ -29,7 +29,7 @@ class CumulantTransformer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, samples):
-        return [(self.cumulant_40(sample), self.cumulant_42(sample)) for sample in samples]
+        return [(self.cumulant_40(sample), self.cumulant_42(sample), self.cumulant_63(sample)) for sample in samples]
 
     def cumulant_40(self, sample):  # C_40 = mean(y^4) - 3*mean(y^2)^2
         second_term = np.multiply(sample, sample)
@@ -43,3 +43,31 @@ class CumulantTransformer(BaseEstimator, TransformerMixin):
         second_term = np.mean(np.multiply(sample, sample))
         third_term = np.mean(np.multiply(np.abs(sample), np.abs(sample)))
         return np.abs(first_term - np.abs(second_term * second_term) - 2 * third_term * third_term)
+
+    def cumulant_63(self, sample):
+        # C_63 = mean(y^6)) - 9*mean(abs(y)^4)*mean(abs(y)^2) +
+        # 12*abs(mean(y^2))^2*mean(abs(y)^2) + 12*mean(abs(y)^2)
+        abs_y = np.abs(sample)
+        first_term = np.zeros((np.size(sample)))
+        for x in range(1, 6, 1):  # mean(y^6)
+            print x
+            if x == 0:
+                first_term = np.multiply(np.ones(np.size(sample)), sample)
+            else:
+                first_term = np.multiply(first_term, sample)
+
+        # abs(y)^2
+        second_term = np.multiply(abs_y, abs_y)
+
+        # mean(abs(y)^4)*mean(abs(y)^2)
+        second_term = np.mean(second_term)*np.mean(np.multiply(second_term, second_term))
+
+        # mean(y^2)
+        third_term = np.mean(np.multiply(sample, sample))
+
+        # abs(mean(y^2))^2*mean(abs(y^2))
+        third_term = np.abs(third_term)*np.abs(third_term)*np.mean(np.multiply(abs_y, abs_y))
+
+        # mean(abs(y)^2)
+        fourth_term = np.mean(np.multiply(abs_y, abs_y))
+        return first_term - 9*second_term + 12*third_term + 12*fourth_term

@@ -2,6 +2,7 @@ from classify.modulation_and_coding_scheme import ModulationAndCodingScheme
 from sklearn.svm import SVC
 from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.pipeline import Pipeline
+from sklearn.decomposition import PCA
 from sklearn.metrics import accuracy_score
 from sklearn.externals import joblib
 from classify.cumulant_transformer import CumulantTransformer
@@ -10,7 +11,7 @@ import logging
 import numpy as np
 
 NUM_SAMPLES_PER_SNR = 50
-NUM_SAMPLES_PER_SIGNAL = 1000
+NUM_SAMPLES_PER_SIGNAL = 2**10
 SNR_RANGE = range(-5, 15, 1)
 
 
@@ -29,6 +30,7 @@ class MCSClassifier:
         self.labels = np.zeros((len(SNR_RANGE)*len(self.classes)*NUM_SAMPLES_PER_SNR,), dtype=np.int32)
         self.clf = Pipeline([
             ('cumulants', CumulantTransformer()),
+            ('PCA', PCA()),
             ('SVM', SVC(kernel='linear', decision_function_shape='ovo'))
         ])
         self.generate_features()
@@ -40,7 +42,7 @@ class MCSClassifier:
         for snr_index, snr in enumerate(SNR_RANGE):
             for tb_index, top_block in enumerate(self.classes):
                 top_block.set_snr_db(snr)
-                top_block.run()
+                top_block.start()
                 logging.info("Generating features for tb:{0} snr: {1}".format(tb_index, snr))
                 for x in range(NUM_SAMPLES_PER_SNR):
                     old_sample = top_block.blocks_probe_signal_vx_0.level()
