@@ -49,8 +49,7 @@ class CumulantTransformer(BaseEstimator, TransformerMixin):
         # 12*abs(mean(y^2))^2*mean(abs(y)^2) + 12*mean(abs(y)^2)
         abs_y = np.abs(sample)
         first_term = np.zeros((np.size(sample)))
-        for x in range(1, 6, 1):  # mean(y^6)
-            print x
+        for x in range(6):  # mean(y^6)
             if x == 0:
                 first_term = np.multiply(np.ones(np.size(sample)), sample)
             else:
