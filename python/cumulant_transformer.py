@@ -61,6 +61,8 @@ class CumulantTransformer(BaseEstimator, TransformerMixin):
             else:
                 first_term = np.multiply(first_term, sample)
 
+        first_term = np.mean(first_term)
+        
         # abs(y)^2
         second_term = np.multiply(abs_y, abs_y)
 
