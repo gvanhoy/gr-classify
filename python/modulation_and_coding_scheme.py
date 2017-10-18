@@ -19,6 +19,7 @@
 # Boston, MA 02110-1301, USA.
 # 
 from gnuradio import blocks
+from gnuradio import channels
 from gnuradio import digital
 from gnuradio import fec
 from gnuradio import gr
@@ -44,6 +45,7 @@ class ModulationAndCodingScheme(gr.top_block):
         self.enc_cc = enc_cc = fec.cc_encoder_make(2048, 7, 2, ([79, 109]), 0, fec.CC_STREAMING, False)
         self.const = digital.constellation_bpsk().base()
         self.puncpat = '11'
+        self.snr_db = 10
 
         self.get_constellation_from_string(modulation)
         self.get_puncpat_from_string(code_rate)
@@ -57,6 +59,15 @@ class ModulationAndCodingScheme(gr.top_block):
         self.blocks_vector_sink_x_0 = blocks.vector_sink_c(1)
         self.blocks_head_0 = blocks.head(gr.sizeof_gr_complex*1, self.num_samples)
         self.analog_random_source_x_0 = blocks.vector_source_b(map(int, np.random.randint(0, 256, 10000)), True)
+        self.channels_channel_model_0 = channels.channel_model(
+        	noise_voltage=numpy.sqrt(10.0**(-self.snr_db/10.0)/2),
+        	frequency_offset=0.0,
+        	epsilon=1.0,
+        	taps=(1.0, ),
+        	noise_seed=0,
+        	block_tags=False
+        )
+
 
         ##################################################
         # Connections
@@ -84,6 +95,10 @@ class ModulationAndCodingScheme(gr.top_block):
 
     def set_const(self, const):
         self.const = const
+
+    def set_snr_db(self, snr_db):
+        self.snr_db = snr_db
+        self.channels_channel_model_0.set_noise_voltage(np.sqrt(10.0**(-self.snr_db/10.0)/2))
 
     def get_constellation_from_string(self, const_string):
         self.const = {

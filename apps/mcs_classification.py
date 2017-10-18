@@ -1,4 +1,4 @@
-from constellation_modulator import constellation_modulator
+from classify.modulation_and_coding_scheme import ModulationAndCodingScheme
 from sklearn.svm import SVC
 from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.pipeline import Pipeline
@@ -10,20 +10,22 @@ import logging
 import numpy as np
 
 NUM_SAMPLES_PER_SNR = 50
+NUM_SAMPLES_PER_SIGNAL = 1000
 SNR_RANGE = range(-5, 15, 1)
 
 
-class Classifier:
+class MCSClassifier:
     def __init__(self):
         self.logger = logging.getLogger()
         self.logger.setLevel(logging.INFO)
 
-        self.classes = [constellation_modulator('BPSK'),
-                        constellation_modulator('QPSK'),
-                        constellation_modulator('8PSK'),
-                        constellation_modulator('16QAM')]
+        self.classes = [ModulationAndCodingScheme('bpsk', '1/2', NUM_SAMPLES_PER_SIGNAL),
+                        ModulationAndCodingScheme('bpsk', '2/3', NUM_SAMPLES_PER_SIGNAL),
+                        ModulationAndCodingScheme('bpsk', '3/4', NUM_SAMPLES_PER_SIGNAL),
+                        ModulationAndCodingScheme('bpsk', '5/6', NUM_SAMPLES_PER_SIGNAL)]
+
         self.accuracy = np.zeros((len(SNR_RANGE),), dtype=np.float32)
-        self.features = np.ndarray((len(SNR_RANGE)*len(self.classes)*NUM_SAMPLES_PER_SNR, self.classes[0].get_signal_len()), dtype=np.complex64)
+        self.features = np.ndarray((len(SNR_RANGE)*len(self.classes)*NUM_SAMPLES_PER_SNR, NUM_SAMPLES_PER_SIGNAL), dtype=np.complex64)
         self.labels = np.zeros((len(SNR_RANGE)*len(self.classes)*NUM_SAMPLES_PER_SNR,), dtype=np.int32)
         self.clf = Pipeline([
             ('cumulants', CumulantTransformer()),
@@ -32,7 +34,7 @@ class Classifier:
         self.generate_features()
         self.cross_validation()
         self.pcc_v_snr()
-        self.save_model()
+        # self.save_model()
 
     def generate_features(self):
         for snr_index, snr in enumerate(SNR_RANGE):
@@ -82,8 +84,8 @@ class Classifier:
         plt.clf()
 
     def save_model(self):
-        joblib.dump(self.clf, 'cumulant_classifier.pkl')
+        joblib.dump(self.clf, 'mcs_classifier.pkl')
 
 
 if __name__ == '__main__':
-    main_class = Classifier()
+    main_class = MCSClassifier()
