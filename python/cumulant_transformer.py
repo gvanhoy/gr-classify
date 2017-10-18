@@ -17,14 +17,13 @@
 # along with this software; see the file COPYING.  If not, write to
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
-#
-
+# 
 from sklearn.base import BaseEstimator, TransformerMixin
 import numpy as np
 
 
-class Cumulants(BaseEstimator, TransformerMixin):
-    """Extract cumulant_40 features"""
+class CumulantTransformer(BaseEstimator, TransformerMixin):
+    """Extract cumulant features"""
 
     def fit(self, x, y=None):
         return self
