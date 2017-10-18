@@ -60,7 +60,7 @@ class ModulationAndCodingScheme(gr.top_block):
         self.blocks_head_0 = blocks.head(gr.sizeof_gr_complex*1, self.num_samples)
         self.analog_random_source_x_0 = blocks.vector_source_b(map(int, np.random.randint(0, 256, 10000)), True)
         self.channels_channel_model_0 = channels.channel_model(
-        	noise_voltage=numpy.sqrt(10.0**(-self.snr_db/10.0)/2),
+        	noise_voltage=np.sqrt(10.0**(-self.snr_db/10.0)/2),
         	frequency_offset=0.0,
         	epsilon=1.0,
         	taps=(1.0, ),
