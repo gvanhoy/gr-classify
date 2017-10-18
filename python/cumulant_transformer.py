@@ -46,7 +46,7 @@ class CumulantTransformer(BaseEstimator, TransformerMixin):
 
     def cumulant_63(self, sample):
         '''
-        C_63 = mean(y^6)) - 9*mean(abs(y)^4)*mean(abs(y)^2) +
+        C_63 = mean(abs(y)^6)) - 9*mean(abs(y)^4)*mean(abs(y)^2) +
         12*abs(mean(y^2))^2*mean(abs(y)^2) + 12*mean(abs(y)^2)
         :param sample:
         :return:
@@ -54,15 +54,15 @@ class CumulantTransformer(BaseEstimator, TransformerMixin):
 
         abs_y = np.abs(sample)
         first_term = np.zeros((np.size(sample)))
-        # mean(y^6)
-        for x in range(6):  # mean(y^6)
+        # mean(abs(y)^6)
+        for x in range(6):
             if x == 0:
-                first_term = np.multiply(np.ones(np.size(sample)), sample)
+                first_term = np.multiply(np.ones(np.size(sample)), abs_y)
             else:
-                first_term = np.multiply(first_term, sample)
+                first_term = np.multiply(first_term, abs_y)
 
         first_term = np.mean(first_term)
-        
+
         # abs(y)^2
         second_term = np.multiply(abs_y, abs_y)
 
