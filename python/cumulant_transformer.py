@@ -77,5 +77,4 @@ class CumulantTransformer(BaseEstimator, TransformerMixin):
 
         # mean(abs(y)^2)
         fourth_term = np.mean(np.multiply(abs_y, abs_y))
-        print first_term - 9*second_term + 12*third_term + 12*fourth_term
         return first_term - 9*second_term + 12*third_term + 12*fourth_term
