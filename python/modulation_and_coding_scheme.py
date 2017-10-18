@@ -42,7 +42,7 @@ class ModulationAndCodingScheme(gr.top_block):
         self.code_rate = code_rate
         self.num_samples = num_samples
         self.code_type = code_type
-        self.enc_cc = enc_cc = fec.cc_encoder_make(25, 7, 2, ([79, 109]), 0, fec.CC_STREAMING, False)
+        self.enc_cc = enc_cc = fec.cc_encoder_make(2048, 7, 2, ([79, 109]), 0, fec.CC_STREAMING, False)
         self.const = digital.constellation_bpsk().base()
         self.puncpat = '11'
         self.snr_db = 10
