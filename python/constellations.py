@@ -26,7 +26,7 @@ def constellation_64qam():
     # points are separated as such
     real, imaginary = np.meshgrid(np.linspace(-7, 7, 8), np.linspace(-7, 7, 8))
     constellation_points = real + np.multiply(imaginary, 1j)
-    print constellation_points[:]
+    print constellation_points.flatten()
     gray_code = [
         4, 12, 28, 20, 52, 60, 44, 36,
         5, 13, 29, 21, 53, 61, 45, 37,
@@ -38,7 +38,7 @@ def constellation_64qam():
         0, 8, 24, 16, 48, 56, 40, 32
     ]
     return digital.constellation_rect(
-        constellation_points.tolist(),
+        constellation_points.flatten(),
         gray_code,
         4,  # rotational symmetry
         8,  # real sectors
