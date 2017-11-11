@@ -37,11 +37,11 @@ def constellation_64qam():
         0, 8, 24, 16, 48, 56, 40, 32
     ]
     return digital.constellation_rect(
-        constellation_points,
-        gray_code,
-        4, # rotational symmetry
-        8, # real sectors
-        8, # imaginary sectors
-        2, # real sector width
-        2  # imaginary sector width
+        (constellation_points),
+        (gray_code),
+        4,  # rotational symmetry
+        8,  # real sectors
+        8,  # imaginary sectors
+        2,  # real sector width
+        2   # imaginary sector width
     ).base()
