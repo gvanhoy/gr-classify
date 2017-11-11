@@ -45,3 +45,39 @@ def constellation_64qam():
         2,  # real sector width
         2   # imaginary sector width
     ).base()
+
+
+def constellation_32qam_cross():
+    '''
+            0   1   29  28
+        4   8   12  16  20  24
+        5   9   13  17  21  25
+        6   10  14  18  22  26
+        7   11  15  19  23  27
+            3   2   30  31
+    '''
+    constellation_points = [
+        -3 + 5j, -1 + 5j, 1 + 5j, 3 + 5j,
+        -5 + 3j, -3 + 3j, -1 + 3j, 1 + 3j, 3 + 3j, 3 + 3j,
+        -5 + 1j, -3 + 1j, -1 + 1j, 1 + 1j, 3 + 1j, 3 + 1j,
+        -5 - 1j, -3 - 1j, -1 - 1j, 1 - 1j, 3 - 1j, 3 - 1j,
+        -5 - 3j, -3 - 3j, -1 - 3j, 1 - 3j, 3 - 3j, 3 - 3j,
+        -3 - 5j, -1 - 5j, 1 - 5j, 3 - 5j
+    ]
+    gray_code = [
+        0, 1, 29, 28,
+        4, 8, 12, 16, 20, 24,
+        5, 9, 13, 17, 21, 25,
+        6, 10, 14, 18, 22, 26,
+        7, 11, 15, 19, 23, 27,
+        3, 2, 30, 31
+    ]
+    return digital.constellation_rect(
+        constellation_points,
+        gray_code,
+        4,  # rotational symmetry
+        6,  # real sectors
+        6,  # imaginary sectors
+        2,  # real sector width
+        2   # imaginary sector width
+    ).base()
