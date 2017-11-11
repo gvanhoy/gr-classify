@@ -18,11 +18,10 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 # 
-
-import numpy as np
-from gnuradio import gr
-import pmt
 from sklearn.externals import joblib
+from gnuradio import gr
+import numpy as np
+import pmt
 
 
 class trained_model_classifier_vc(gr.sync_block):

@@ -23,6 +23,7 @@ from gnuradio import channels
 from gnuradio import digital
 from gnuradio import fec
 from gnuradio import gr
+from classify.constellations import constellation_64qam
 import numpy as np
 
 
@@ -107,24 +108,7 @@ class ModulationAndCodingScheme(gr.top_block):
             'qpsk': digital.constellation_qpsk().base(),
             '8psk': digital.constellation_8psk().base(),
             '16qam': digital.constellation_16qam().base(),
-            '64qam': digital.constellation_rect(
-                (np.add([-7, -7, -7, -7, -7, -7, -7, -7,
-                         -5, -5, -5, -5, -5, -5, -5, -5,
-                         -3, -3, -3, -3, -3, -3, -3, -3,
-                         -1, -1, -1, -1, -1, -1, -1, -1,
-                         1, 1, 1, 1, 1, 1, 1, 1,
-                         3, 3, 3, 3, 3, 3, 3, 3,
-                         5, 5, 5, 5, 5, 5, 5, 5,
-                         7, 7, 7, 7, 7, 7, 7, 7],
-                        [-7j, -5j, -3j, -1j, 1j, 3j, 5j, 7j,
-                         -7j, -5j, -3j, -1j, 1j, 3j, 5j, 7j,
-                         -7j, -5j, -3j, -1j, 1j, 3j, 5j, 7j,
-                         -7j, -5j, -3j, -1j, 1j, 3j, 5j, 7j,
-                         -7j, -5j, -3j, -1j, 1j, 3j, 5j, 7j,
-                         -7j, -5j, -3j, -1j, 1j, 3j, 5j, 7j,
-                         -7j, -5j, -3j, -1j, 1j, 3j, 5j, 7j,
-                         -7j, -5j, -3j, -1j, 1j, 3j, 5j, 7j])),
-                (range(64)), 4, 8, 8, 2, 2).base()
+            '64qam': constellation_64qam(),
         }.get(const_string, digital.constellation_bpsk().base())
 
     def get_puncpat_from_string(self, code_rate_string):
