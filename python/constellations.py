@@ -21,7 +21,8 @@
 import numpy as np
 from gnuradio import digital
 
-def constellation_64qam:
+
+def constellation_64qam():
     # points are separated as such
     real, imaginary = np.meshgrid(np.linspace(-7, 7, 8), np.linspace(-7, 7, 8))
     constellation_points = real + np.multiply(imaginary, 1j)
