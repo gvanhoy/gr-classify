@@ -36,7 +36,7 @@ def constellation_8qam_cross():
         0 - 3j
     ]
     # This is not quite a gray-code, but an optimal mapping.
-    # This was taken from the MATLAB generated 32-QAM mapping
+    # This was taken from a ppt I found online from Broadcom
     gray_code = [
         0,
         4, 6, 2,

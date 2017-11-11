@@ -23,7 +23,7 @@ from gnuradio import channels
 from gnuradio import digital
 from gnuradio import fec
 from gnuradio import gr
-from classify.constellations import constellation_64qam
+from classify import constellations
 import numpy as np
 
 
@@ -107,8 +107,10 @@ class ModulationAndCodingScheme(gr.top_block):
             'bpsk': digital.constellation_bpsk().base(),
             'qpsk': digital.constellation_qpsk().base(),
             '8psk': digital.constellation_8psk().base(),
+            '8qam_cross': constellations.constellation_8qam_cross(),
             '16qam': digital.constellation_16qam().base(),
-            '64qam': constellation_64qam(),
+            '32qam_cross': constellations.constellation_32qam_cross(),
+            '64qam': constellations.constellation_64qam(),
         }.get(const_string, digital.constellation_bpsk().base())
 
     def get_puncpat_from_string(self, code_rate_string):
