@@ -60,7 +60,7 @@ class ModulationAndCodingScheme(gr.top_block):
         self.blocks_stream_to_vector_0 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, self.num_samples)
         self.analog_random_source_x_0 = blocks.vector_source_b(map(int, np.random.randint(0, 256, 10000)), True)
         self.channels_channel_model_0 = channels.channel_model(
-            noise_voltage=np.sqrt(10.0**(-self.snr_db/10.0)/2),
+            noise_voltage=np.sqrt(10.0**(-self.snr_db/10.0)),
             frequency_offset=0.0,
             epsilon=1.0,
             taps=(1.0, ),
@@ -106,7 +106,25 @@ class ModulationAndCodingScheme(gr.top_block):
             'bpsk': digital.constellation_bpsk().base(),
             'qpsk': digital.constellation_qpsk().base(),
             '8psk': digital.constellation_8psk().base(),
-            '16qam': digital.constellation_16qam().base()
+            '16qam': digital.constellation_16qam().base(),
+            '64qam': digital.constellation_rect(
+                (np.add([-7, -7, -7, -7, -7, -7, -7, -7,
+                         -5, -5, -5, -5, -5, -5, -5, -5,
+                         -3, -3, -3, -3, -3, -3, -3, -3,
+                         -1, -1, -1, -1, -1, -1, -1, -1,
+                         1, 1, 1, 1, 1, 1, 1, 1,
+                         3, 3, 3, 3, 3, 3, 3, 3,
+                         5, 5, 5, 5, 5, 5, 5, 5,
+                         7, 7, 7, 7, 7, 7, 7, 7],
+                        [-7j, -5j, -3j, -1j, 1j, 3j, 5j, 7j,
+                         -7j, -5j, -3j, -1j, 1j, 3j, 5j, 7j,
+                         -7j, -5j, -3j, -1j, 1j, 3j, 5j, 7j,
+                         -7j, -5j, -3j, -1j, 1j, 3j, 5j, 7j,
+                         -7j, -5j, -3j, -1j, 1j, 3j, 5j, 7j,
+                         -7j, -5j, -3j, -1j, 1j, 3j, 5j, 7j,
+                         -7j, -5j, -3j, -1j, 1j, 3j, 5j, 7j,
+                         -7j, -5j, -3j, -1j, 1j, 3j, 5j, 7j])),
+                (range(64)), 4, 8, 8, 2, 2).base()
         }.get(const_string, digital.constellation_bpsk().base())
 
     def get_puncpat_from_string(self, code_rate_string):

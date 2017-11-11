@@ -33,7 +33,8 @@ GR_PYTHON_INSTALL(
     __init__.py
     trained_model_classifier_vc.py
     cumulant_transformer.py
-    modulation_and_coding_scheme.py DESTINATION ${GR_PYTHON_DIR}/classify
+    modulation_and_coding_scheme.py
+    constellations.py DESTINATION ${GR_PYTHON_DIR}/classify
 )
 
 ########################################################################
