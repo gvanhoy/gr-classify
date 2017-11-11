@@ -22,6 +22,36 @@ import numpy as np
 from gnuradio import digital
 
 
+def constellation_8qam_circular():
+    '''
+            1
+          5   4
+        2       0
+          6   7
+            3
+    '''
+    constellation_points = [
+        complex(0, 1 + np.sqrt(3)),
+        -1 + 1j, 1 + 1j,
+        -1 - np.sqrt(3), 1 + np.sqrt(3),
+        -1 - 1j, 1 - 1j,
+        complex(0, -1 - np.sqrt(3))
+        ]
+    gray_code = [
+        1,
+        5, 4,
+        2, 0,
+        6, 7,
+        3
+    ]
+    return digital.constellation_calcdist(
+        constellation_points,
+        gray_code,
+        4,  # rotational symmetry
+        1   # dimensionality
+    ).base()
+
+
 def constellation_8qam_cross():
     '''
             0

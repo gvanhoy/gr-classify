@@ -79,7 +79,7 @@ class MCSClassifier:
 
     def save_figure(self, figure_number, figure_title, file_name):
         plt.figure(figure_number)
-        plt.xlabel('SNR E_s/N_0(dB)', fontsize=18)
+        plt.xlabel('SNR $E_s/N_0$ (dB)', fontsize=18)
         plt.ylabel('Percent Correct Classification', fontsize=16)
         plt.xlim((min(SNR_RANGE), max(SNR_RANGE)))
         plt.ylim((0, 100))
