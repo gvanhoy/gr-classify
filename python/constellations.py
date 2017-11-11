@@ -26,7 +26,6 @@ def constellation_64qam():
     # points are separated as such
     real, imaginary = np.meshgrid(np.linspace(-7, 7, 8), np.linspace(-7, 7, 8))
     constellation_points = real + np.multiply(imaginary, 1j)
-    print constellation_points.flatten()
     gray_code = [
         4, 12, 28, 20, 52, 60, 44, 36,
         5, 13, 29, 21, 53, 61, 45, 37,
