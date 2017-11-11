@@ -100,7 +100,7 @@ class ModulationAndCodingScheme(gr.top_block):
 
     def set_snr_db(self, snr_db):
         self.snr_db = snr_db
-        self.channels_channel_model_0.set_noise_voltage(np.sqrt(10.0**(-self.snr_db/10.0)/2))
+        self.channels_channel_model_0.set_noise_voltage(np.sqrt(10.0**(-self.snr_db/10.0)))
 
     def get_constellation_from_string(self, const_string):
         self.const = {

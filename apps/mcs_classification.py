@@ -8,8 +8,10 @@ from sklearn.externals import joblib
 from classify.cumulant_transformer import CumulantTransformer
 import matplotlib.pyplot as plt
 import logging
+import time
 import numpy as np
 
+FIGURE_FILENAME = '../results/pcc_v_snr_{0}'.format(time.strftime("%Y%m%d-%H%M%S"))
 NUM_SAMPLES_PER_SNR = 50
 NUM_SAMPLES_PER_SIGNAL = 2**10
 SNR_RANGE = range(-5, 15, 1)
@@ -55,7 +57,7 @@ class MCSClassifier:
                     self.features[x + tb_index*NUM_SAMPLES_PER_SNR + snr_index*len(self.classes)*NUM_SAMPLES_PER_SNR, :] = new_sample
                     self.labels[x + tb_index*NUM_SAMPLES_PER_SNR + snr_index*len(self.classes)*NUM_SAMPLES_PER_SNR] = tb_index
                 top_block.stop()
-        train_features, _, train_labels, _ = train_test_split(self.features, self.labels, test_size = 0.33, random_state = 42)
+        train_features, _, train_labels, _ = train_test_split(self.features, self.labels, test_size=0.33, random_state = 42)
         self.clf.fit(train_features, train_labels)
 
     def pcc_v_snr(self):
@@ -70,7 +72,7 @@ class MCSClassifier:
                  color='blue',
                  linewidth=3.0,
                  linestyle='--')
-        self.save_figure(1, 'Percent Correct Classification', 'pcc_v_snr')
+        self.save_figure(1, 'Percent Correct Classification', FIGURE_FILENAME)
 
     def cross_validation(self):
         logging.info("Cross Validation Scores: " + str(cross_val_score(self.clf, self.features, self.labels)))
