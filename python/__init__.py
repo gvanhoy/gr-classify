@@ -33,5 +33,5 @@ except ImportError:
 # import any pure python here
 from trained_model_classifier_vc import trained_model_classifier_vc
 from cumulant_transformer import CumulantTransformer
-from modulation_and_coding_scheme import ModulationAndCodingScheme
+from linear_digital_and_coding import LinearDigitalModulationAndCoding
 import constellations

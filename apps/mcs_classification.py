@@ -1,4 +1,4 @@
-from classify.modulation_and_coding_scheme import ModulationAndCodingScheme
+from classify.linear_digital_and_coding import LinearDigitalModulationAndCoding
 from sklearn.svm import SVC
 from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.pipeline import Pipeline
@@ -22,13 +22,13 @@ class MCSClassifier:
         self.logger = logging.getLogger()
         self.logger.setLevel(logging.INFO)
 
-        self.classes = [ModulationAndCodingScheme('bpsk', '1', NUM_SAMPLES_PER_SIGNAL),
-                        ModulationAndCodingScheme('qpsk', '1', NUM_SAMPLES_PER_SIGNAL),
-                        ModulationAndCodingScheme('8psk', '1', NUM_SAMPLES_PER_SIGNAL),
-                        ModulationAndCodingScheme('8qam_cross', '1', NUM_SAMPLES_PER_SIGNAL),
-                        ModulationAndCodingScheme('16qam', '1', NUM_SAMPLES_PER_SIGNAL),
-                        ModulationAndCodingScheme('32qam_cross', '1', NUM_SAMPLES_PER_SIGNAL),
-                        ModulationAndCodingScheme('64qam', '1', NUM_SAMPLES_PER_SIGNAL)]
+        self.classes = [LinearDigitalModulationAndCoding('bpsk', '1', NUM_SAMPLES_PER_SIGNAL),
+                        LinearDigitalModulationAndCoding('qpsk', '1', NUM_SAMPLES_PER_SIGNAL),
+                        LinearDigitalModulationAndCoding('8psk', '1', NUM_SAMPLES_PER_SIGNAL),
+                        LinearDigitalModulationAndCoding('8qam_cross', '1', NUM_SAMPLES_PER_SIGNAL),
+                        LinearDigitalModulationAndCoding('16qam', '1', NUM_SAMPLES_PER_SIGNAL),
+                        LinearDigitalModulationAndCoding('32qam_cross', '1', NUM_SAMPLES_PER_SIGNAL),
+                        LinearDigitalModulationAndCoding('64qam', '1', NUM_SAMPLES_PER_SIGNAL)]
 
         self.accuracy = np.zeros((len(SNR_RANGE),), dtype=np.float32)
         self.features = np.ndarray((len(SNR_RANGE)*len(self.classes)*NUM_SAMPLES_PER_SNR, NUM_SAMPLES_PER_SIGNAL), dtype=np.complex64)

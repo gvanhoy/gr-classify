@@ -27,7 +27,7 @@ from classify import constellations
 import numpy as np
 
 
-class ModulationAndCodingScheme(gr.top_block):
+class LinearDigitalModulationAndCoding(gr.top_block):
     def __init__(self,
                  modulation,
                  code_rate,
@@ -104,11 +104,15 @@ class ModulationAndCodingScheme(gr.top_block):
 
     def get_constellation_from_string(self, const_string):
         self.const = {
+            'ook': constellations.constellation_ook(),
             'bpsk': digital.constellation_bpsk().base(),
             'qpsk': digital.constellation_qpsk().base(),
+            '4ask': constellations.constellation_4_ask(),
             '8psk': digital.constellation_8psk().base(),
             '8qam_cross': constellations.constellation_8qam_cross(),
+            '8qam_circular': constellations.constellation_8qam_circular(),
             '16qam': digital.constellation_16qam().base(),
+            '16psk': constellations.constellation_16_psk(),
             '32qam_cross': constellations.constellation_32qam_cross(),
             '64qam': constellations.constellation_64qam(),
         }.get(const_string, digital.constellation_bpsk().base())
