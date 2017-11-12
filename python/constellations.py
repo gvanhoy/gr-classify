@@ -22,6 +22,29 @@ import numpy as np
 from gnuradio import digital
 
 
+def constellation_ook():
+    '''
+        0 1
+    '''
+    constellation_points = [
+        0, 1
+    ]
+    # This is not quite a gray-code, but an optimal mapping.
+    # This was taken from a ppt I found online from Broadcom
+    gray_code = [
+        0, 1
+    ]
+    return digital.constellation_rect(
+        constellation_points,
+        gray_code,
+        1,  # rotational symmetry
+        2,  # real sectors
+        1,  # imaginary sectors
+        1,  # real sector width
+        1   # imaginary sector width
+    ).base()
+
+
 def constellation_4_ask():
     '''
         0   1   3   2
