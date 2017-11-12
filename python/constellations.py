@@ -123,6 +123,32 @@ def constellation_8qam_cross():
     ).base()
 
 
+def constellation_16_psk():
+    '''
+                    6
+                7       2
+            5               3
+        4                       1
+    12                              0
+        13                      8
+            15              9
+                14      11
+                    10
+    '''
+    constellation_points = np.exp(2j*np.linspace(0, np.pi*15/16.0, 16))
+    # This is not quite a gray-code, but an optimal mapping.
+    # This was taken from the MATLAB generated 32-QAM mapping
+    gray_code = [
+        6, 7, 5, 4, 12, 13, 15, 14, 10, 11, 9, 8, 0, 1, 3, 2
+    ]
+    return digital.constellation_calcdist(
+        constellation_points,
+        gray_code,
+        16,  # rotational symmetry
+        1   # dimensionality
+    ).base()
+
+
 def constellation_32qam_cross():
     '''
             0   1   29  28
