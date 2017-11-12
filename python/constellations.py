@@ -29,19 +29,14 @@ def constellation_ook():
     constellation_points = [
         0, 1
     ]
-    # This is not quite a gray-code, but an optimal mapping.
-    # This was taken from a ppt I found online from Broadcom
     gray_code = [
         0, 1
     ]
-    return digital.constellation_rect(
+    return digital.constellation_calcdist(
         constellation_points,
         gray_code,
         1,  # rotational symmetry
-        2,  # real sectors
-        1,  # imaginary sectors
-        1,  # real sector width
-        1   # imaginary sector width
+        1   # dimensionality
     ).base()
 
 
@@ -52,8 +47,6 @@ def constellation_4_ask():
     constellation_points = [
         -3, -1, 1, 3
     ]
-    # This is not quite a gray-code, but an optimal mapping.
-    # This was taken from a ppt I found online from Broadcom
     gray_code = [
         0, 1, 3, 2
     ]
