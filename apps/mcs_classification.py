@@ -41,7 +41,7 @@ class MCSClassifier:
         self.generate_features()
         self.cross_validation()
         self.pcc_v_snr()
-        # self.save_model()
+        self.save_model()
 
     def generate_features(self):
         for snr_index, snr in enumerate(SNR_RANGE):

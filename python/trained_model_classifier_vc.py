@@ -38,7 +38,10 @@ class trained_model_classifier_vc(gr.sync_block):
             0: 'BPSK',
             1: 'QPSK',
             2: '8PSK',
-            3: '16QAM'
+            3: '8QAM-Cross',
+            4: '16QAM',
+            5: '32QAM',
+            6: '64QAM'
         }
         self.message_port_register_out(pmt.intern('classification_info'))
         self.classifier = joblib.load(trained_model_filename)
