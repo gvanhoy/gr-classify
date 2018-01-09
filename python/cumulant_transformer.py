@@ -55,26 +55,23 @@ class CumulantTransformer(BaseEstimator, TransformerMixin):
         abs_y = np.abs(sample)
         first_term = np.zeros((np.size(sample)))
         # mean(abs(y)^6)
-        for x in range(6):
-            if x == 0:
-                first_term = np.multiply(np.ones(np.size(sample)), abs_y)
-            else:
-                first_term = np.multiply(first_term, abs_y)
+        for x in range(len(first_term)):
+            first_term[x] = pow(abs_y[x], 6)
 
         first_term = np.mean(first_term)
 
         # abs(y)^2
-        second_term = np.multiply(abs_y, abs_y)
+        mean_abs_y_squared = np.mean(np.multiply(abs_y, abs_y))
 
-        # mean(abs(y)^4)*mean(abs(y)^2)
-        second_term = np.mean(second_term)*np.mean(np.multiply(second_term, second_term))
+        # mean(abs(y)^4)
+        second_term = np.mean(np.multiply(np.multiply(abs_y, abs_y), np.multiply(abs_y, abs_y)))
 
         # mean(y^2)
         third_term = np.mean(np.multiply(sample, sample))
 
-        # abs(mean(y^2))^2*mean(abs(y^2))
-        third_term = np.abs(third_term)*np.abs(third_term)*np.mean(np.multiply(abs_y, abs_y))
+        # abs(mean(y^2))^2
+        third_term = np.abs(third_term)*np.abs(third_term)
 
-        # mean(abs(y)^2)
-        fourth_term = np.mean(np.multiply(abs_y, abs_y))
-        return first_term - 9*second_term + 12*third_term + 12*fourth_term
+        print first_term - (9*second_term + 12*third_term + 12)*mean_abs_y_squared
+
+        return first_term - (9*second_term + 12*third_term + 12)*mean_abs_y_squared
