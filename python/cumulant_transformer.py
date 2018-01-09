@@ -76,6 +76,6 @@ class CumulantTransformer(BaseEstimator, TransformerMixin):
         # abs(mean(y^2))^2
         third_term = np.abs(third_term)*np.abs(third_term)
 
-        print first_term - (9*second_term + 12*third_term + 12)*mean_abs_y_squared
+        print np.abs(first_term - (9*second_term + 12*third_term + 12)*mean_abs_y_squared)
 
-        return first_term - (9*second_term + 12*third_term + 12)*mean_abs_y_squared
+        return np.abs(first_term - (9*second_term + 12*third_term + 12)*mean_abs_y_squared)
