@@ -57,7 +57,7 @@ class LinearDigitalModulationAndCoding(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
-        self.fec_extended_encoder_0 = fec.extended_encoder(encoder_obj_list=enc_cc, threading='capillary', puncpat=self.puncpat)
+        self.fec_extended_encoder_0 = fec.extended_encoder(encoder_obj_list=self.enc_cc, threading='capillary', puncpat=self.puncpat)
         self.digital_chunks_to_symbols_xx_0 = digital.chunks_to_symbols_bc((self.const.points()), 1)
         self.blocks_probe_signal_vx_0 = blocks.probe_signal_vc(self.num_samples)
         self.blocks_stream_to_vector_0 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, self.num_samples)
