@@ -29,7 +29,7 @@ class CumulantTransformer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, samples):
-        return [(self.cumulant_40(sample), self.cumulant_42(sample)) for sample in samples]
+        return [(self.cumulant_40(sample), self.cumulant_42(sample), self.cumulant_63(sample)) for sample in samples]
 
     def cumulant_40(self, sample):  # C_40 = mean(y^4) - 3*mean(y^2)^2
         second_term = np.multiply(sample, sample)
@@ -75,7 +75,5 @@ class CumulantTransformer(BaseEstimator, TransformerMixin):
 
         # abs(mean(y^2))^2
         third_term = np.abs(third_term)*np.abs(third_term)
-
-        # print "Final: {0} 1: {1} 2: {2} 3: {3} 4: {4}".format(np.abs(first_term + (-9*second_term + 12*third_term + 12)*mean_abs_y_squared), first_term, -9*second_term, 12*third_term, mean_abs_y_squared)
 
         return np.abs(first_term + (-9*second_term + 12*third_term + 12)*mean_abs_y_squared)
