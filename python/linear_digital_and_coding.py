@@ -43,7 +43,10 @@ class LinearDigitalModulationAndCoding(gr.top_block):
         self.code_rate = code_rate
         self.num_samples = num_samples
         self.code_type = code_type
-        self.enc_cc = enc_cc = fec.cc_encoder_make(2048, 7, 2, ([79, 109]), 0, fec.CC_STREAMING, False)
+        if code_rate == '1':
+            self.enc_cc = fec.dummy_encoder_make(2048)
+        else:
+            self.enc_cc = enc_cc = fec.cc_encoder_make(2048, 7, 2, ([79, 109]), 0, fec.CC_STREAMING, False)
         self.const = digital.constellation_bpsk().base()
         self.puncpat = '11'
         self.snr_db = 10
@@ -59,9 +62,9 @@ class LinearDigitalModulationAndCoding(gr.top_block):
         self.digital_chunks_to_symbols_xx_0 = digital.chunks_to_symbols_bc((self.const.points()), 1)
         self.blocks_probe_signal_vx_0 = blocks.probe_signal_vc(self.num_samples)
         self.blocks_stream_to_vector_0 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, self.num_samples)
-        self.analog_random_source_x_0 = blocks.vector_source_b(map(int, np.random.randint(0, 256, 10000)), True)
+        self.analog_random_source_x_0 = blocks.vector_source_b(map(int, np.random.randint(0, 256, 100000)), True)
         self.channels_channel_model_0 = channels.channel_model(
-            noise_voltage=np.sqrt(10.0**(-self.snr_db/10.0)),
+            noise_voltage=np.sqrt(10.0**(-sel.snr_db/10.0)/2.0),
             frequency_offset=0.0,
             epsilon=1.0,
             taps=(1.0, ),

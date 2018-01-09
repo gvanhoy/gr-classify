@@ -3,7 +3,7 @@ from sklearn.svm import SVC
 from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.decomposition import PCA
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.externals import joblib
 from classify.cumulant_transformer import CumulantTransformer
 import matplotlib.pyplot as plt
@@ -41,6 +41,7 @@ class MCSClassifier:
         ])
         self.generate_features()
         self.cross_validation()
+        self.confusion_matrix()
         self.pcc_v_snr()
         self.save_model()
 
@@ -77,6 +78,10 @@ class MCSClassifier:
 
     def cross_validation(self):
         logging.info("Cross Validation Scores: " + str(cross_val_score(self.clf, self.features, self.labels)))
+
+    def confusion_matrix(self):
+        y_pred = self.clf.predict(self.features)
+        print confusion_matrix(self.labels, y_pred)
 
     def save_figure(self, figure_number, figure_title, file_name):
         plt.figure(figure_number)
