@@ -54,17 +54,21 @@ class CumulantTransformer(BaseEstimator, TransformerMixin):
 
         abs_y = np.abs(sample)
         first_term = np.zeros((np.size(sample)))
+        second_term = np.zeros((np.size(sample)))
+
+        # abs(y)^2
+        mean_abs_y_squared = np.mean(np.multiply(abs_y, abs_y))
+
         # mean(abs(y)^6)
         for x in range(len(first_term)):
             first_term[x] = pow(abs_y[x], 6)
 
         first_term = np.mean(first_term)
 
-        # abs(y)^2
-        mean_abs_y_squared = np.mean(np.multiply(abs_y, abs_y))
-
         # mean(abs(y)^4)
-        second_term = np.mean(np.multiply(np.multiply(abs_y, abs_y), np.multiply(abs_y, abs_y)))
+        for x in range(len(first_term)):
+            second_term[x] = pow(abs_y[x], 4)
+        second_term = np.mean(second_term)
 
         # mean(y^2)
         third_term = np.mean(np.multiply(sample, sample))
