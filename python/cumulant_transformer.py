@@ -60,13 +60,13 @@ class CumulantTransformer(BaseEstimator, TransformerMixin):
         mean_abs_y_squared = np.mean(np.multiply(abs_y, abs_y))
 
         # mean(abs(y)^6)
-        for x in range(len(first_term)):
+        for x in range(len(sample)):
             first_term[x] = pow(abs_y[x], 6)
 
         first_term = np.mean(first_term)
 
         # mean(abs(y)^4)
-        for x in range(len(first_term)):
+        for x in range(len(sample)):
             second_term[x] = pow(abs_y[x], 4)
         second_term = np.mean(second_term)
 
