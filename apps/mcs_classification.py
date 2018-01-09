@@ -14,7 +14,7 @@ import numpy as np
 FIGURE_FILENAME = '../results/pcc_v_snr_{0}'.format(time.strftime("%Y%m%d-%H%M%S"))
 NUM_SAMPLES_PER_SNR = 50
 NUM_SAMPLES_PER_SIGNAL = 2**10
-SNR_RANGE = range(20, 35, 1)
+SNR_RANGE = range(-5, 15, 1)
 
 
 class MCSClassifier:
@@ -58,7 +58,7 @@ class MCSClassifier:
                     self.features[x + tb_index*NUM_SAMPLES_PER_SNR + snr_index*len(self.classes)*NUM_SAMPLES_PER_SNR, :] = new_sample
                     self.labels[x + tb_index*NUM_SAMPLES_PER_SNR + snr_index*len(self.classes)*NUM_SAMPLES_PER_SNR] = tb_index
                 top_block.stop()
-        train_features, _, train_labels, _ = train_test_split(self.features, self.labels, test_size=0.33, random_state = 42)
+        train_features, _, train_labels, _ = train_test_split(self.features, self.labels, test_size=0.50, random_state=42)
         self.clf.fit(train_features, train_labels)
 
     def pcc_v_snr(self):
