@@ -14,7 +14,7 @@ import numpy as np
 FIGURE_FILENAME = '../results/pcc_v_snr_{0}'.format(time.strftime("%Y%m%d-%H%M%S"))
 NUM_SAMPLES_PER_SNR = 50
 NUM_SAMPLES_PER_SIGNAL = 2**10
-SNR_RANGE = range(-5, 15, 1)
+SNR_RANGE = range(20, 35, 1)
 
 
 class MCSClassifier:
