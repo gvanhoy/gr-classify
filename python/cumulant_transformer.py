@@ -51,7 +51,7 @@ class CumulantTransformer(BaseEstimator, TransformerMixin):
         :param sample:
         :return:
         '''
-
+        print sample
         abs_y = np.abs(sample)
         first_term = np.zeros((np.size(sample)))
         second_term = np.zeros((np.size(sample)))

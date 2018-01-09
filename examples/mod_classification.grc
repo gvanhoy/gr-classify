@@ -893,7 +893,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(808, 116)</value>
+      <value>(800, 116)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1124,7 +1124,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(824, 204)</value>
+      <value>(808, 204)</value>
     </param>
     <param>
       <key>gui_hint</key>
