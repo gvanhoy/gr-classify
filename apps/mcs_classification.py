@@ -26,7 +26,7 @@ class MCSClassifier:
                         LinearDigitalModulationAndCoding('qpsk', '1', NUM_SAMPLES_PER_SIGNAL),
                         LinearDigitalModulationAndCoding('8psk', '1', NUM_SAMPLES_PER_SIGNAL),
                         LinearDigitalModulationAndCoding('8qam_cross', '1', NUM_SAMPLES_PER_SIGNAL),
-                        LinearDigitalModulationAndCoding('16qam', '1', NUM_SAMPLES_PER_SIGNAL)
+                        LinearDigitalModulationAndCoding('16qam', '1', NUM_SAMPLES_PER_SIGNAL),
                         LinearDigitalModulationAndCoding('32qam_cross', '1', NUM_SAMPLES_PER_SIGNAL),
                         LinearDigitalModulationAndCoding('64qam', '1', NUM_SAMPLES_PER_SIGNAL)
                         ]
